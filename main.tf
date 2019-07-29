@@ -1,3 +1,2 @@
-resource "plex_friend" "Jared_Lamb" {
-  email_address = "jared.lamb@sbcglobal.com"
+resource "plex_friend" "jared.lamb@sbcglobal.net" {
 }
