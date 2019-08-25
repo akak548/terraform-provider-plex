@@ -66,7 +66,7 @@ func TestFindFriend(t *testing.T) {
 	}{
 		// Test finding by username
 		{
-			input:    "testuser1",
+			input:    "testuser1@hotmail.com",
 			friends:  friends,
 			expected: testuser1,
 			err:      nil,
@@ -78,20 +78,20 @@ func TestFindFriend(t *testing.T) {
 			expected: testuser2,
 			err:      nil,
 		},
-		// Test finding by email
+		// Test friendNotFound error
 		{
-			input:    "testuser2@gmail.com",
+			input:    "notfound@gmail.com",
 			friends:  friends,
-			expected: testuser2,
-			err:      friendNotFound{"testuser2@gmail.com"},
+			expected: plexclient.Friends{},
+			err:      friendNotFound{"notfound@gmail.com"},
 		},
 	}
 
 	for _, test := range tests {
-		i, err := findFriend(test.input, &friends)
+		i, err := findFriend(test.input, friends)
 
 		if i != test.expected {
-			t.Errorf("Received %v, and expected %v", i, test.expected)
+			t.Errorf("Output Received %v, and expected %v", i, test.expected)
 		}
 		if err != test.err {
 			t.Errorf("Received %v, and expected %v for error", err, test.err)
